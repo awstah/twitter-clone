@@ -26,6 +26,12 @@ const API = {
   login: () => {
     return `${Base.apiUrl()}/auth/login`;
   },
+  createPost: () => {
+    return `${Base.apiUrl()}/posts`;
+  },
+  getTimeline: () => {
+    return `${Base.apiUrl()}/posts/timeline/all`;
+  },
 };
 
 export default API;

@@ -4,9 +4,27 @@ import {
   PhotographIcon,
   VideoCameraIcon,
 } from "@heroicons/react/outline";
-import React from "react";
+import React, { useState } from "react";
+import PostSevices from "../services/PostServices";
 
 function CreatePost() {
+  const [description, setdescription] = useState("");
+
+  const user = localStorage.getItem("user");
+
+  const userParse = JSON.parse(user);
+
+  const data = {
+    description,
+    userId: userParse._id,
+  };
+
+  const postSubmitHandle = async () => {
+    await PostSevices.createPost(data).then((res) => {
+      console.log(res.data);
+    });
+  };
+
   return (
     <div className=" mt-5 px-3 md:px-0 ">
       <div className="max-w-xl mx-auto border-b border-gray-200 pb-5">
@@ -20,6 +38,10 @@ function CreatePost() {
           <div className="w-full">
             <div className="border border-gray-100 flex-grow rounded-xl items-center flex max-h-min">
               <textarea
+                value={description}
+                onChange={(e) => {
+                  setdescription(e.target.value);
+                }}
                 placeholder="Write your post...."
                 className="ml-3 w-full mt-2 outline-none font-semibold"
               ></textarea>
@@ -32,7 +54,9 @@ function CreatePost() {
                 <LocationMarkerIcon className="upload_post_btn bg-gray-100 text-gray-500" />
               </div>
 
-              <button className="post_btn">POST</button>
+              <button onClick={postSubmitHandle} className="post_btn">
+                POST
+              </button>
             </div>
           </div>
         </div>

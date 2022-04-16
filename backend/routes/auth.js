@@ -3,6 +3,8 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 //Register Auth
 router.post("/register", async (req, res) => {
+  console.log(req.body.email, req.body.password);
+
   try {
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt);

@@ -1,6 +1,7 @@
 import { LockClosedIcon, MailIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
 import AuthService from "../services/AuthServices";
+import { useNavigate } from "react-router-dom";
 
 function Login({ setisLogin, isLogin }) {
   const [data, setData] = useState({
@@ -8,6 +9,8 @@ function Login({ setisLogin, isLogin }) {
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const onHandleChange = (e) => {
     let value = e.target.value;
@@ -17,7 +20,8 @@ function Login({ setisLogin, isLogin }) {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     AuthService.login(data).then((res) => {
-      console.log(res);
+      localStorage.setItem("user", JSON.stringify(res.data));
+      navigate("/");
     });
   };
   return (

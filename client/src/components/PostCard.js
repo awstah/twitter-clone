@@ -1,7 +1,7 @@
 import { ChatAlt2Icon, ShareIcon, ThumbUpIcon } from "@heroicons/react/outline";
 import React from "react";
 
-function PostCard({ img }) {
+function PostCard({ post }) {
   return (
     <div className="max-w-xl mx-auto border border-gray-200 rounded-md p-3">
       <div className="flex space-x-4 items-center">
@@ -21,15 +21,7 @@ function PostCard({ img }) {
       </div>
 
       <div className="mt-3 pb-5">
-        <p className="font-normal text-lg">
-          Awsome there is a post for TailwindCSS Awsome there is a post for
-          TailwindCSS Awsome there is a post for TailwindCSS TailwindCSS Awsome
-          there is a post for TailwindCSS
-        </p>
-
-        {img && (
-          <img src={img} alt="post" className="w-auto h-96 rounded-xl mt-4" />
-        )}
+        <p className="font-normal text-lg">{post?.description}</p>
       </div>
 
       <div className="grid grid-cols-3 ">
